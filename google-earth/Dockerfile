@@ -1,9 +1,13 @@
 ## Dockerfile for google-earth
 ## Mac Radigan
 
-  FROM ubuntu:latest
+ #FROM ubuntu:latest
+  FROM phusion/baseimage
 
   MAINTAINER Mac Radigan <mac@radigan.org>
+
+  ## use baseimage-docker's init system
+  CMD ["/sbin/my_init"]
 
   ## update APT
   RUN dpkg --add-architecture i386
@@ -11,9 +15,15 @@
 
   ENV PATH /usr/lib/x86_64-linux-gnu/:$PATH
 
+  ## basic tools
+  RUN apt-get install -y xauth
+  RUN apt-get install -y zsh
+  RUN apt-get install -y screen
+  RUN apt-get install -y wget
+  RUN apt-get install -y curl
+
   ## prerequisites
  #RUN apt-get install -y msttcorefonts
-  RUN apt-get install -y wget
   RUN apt-get install -y xdg-utils
   RUN apt-get install -y libc6-i386
   RUN apt-get install -y libglib2.0-0:i386
@@ -48,6 +58,6 @@
   RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
   # Google Earth entry point
-  ENTRYPOINT ["/usr/bin/google-earth"]
+# ENTRYPOINT ["/usr/bin/google-earth"]
 
 ## *EOF*
