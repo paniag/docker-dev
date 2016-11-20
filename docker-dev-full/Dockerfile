@@ -60,12 +60,7 @@
     rm ~/anaconda.sh
 
   ## users
-  RUN mkdir /home/dev && \
-      mkdir /home/dev/.ssh && \
-      chmod -f 700 /home/dev/.ssh && \
-      mkdir /home/dev/.Xauthority && \
-      chmod -f 700 /home/dev/.Xauthority && \
-      useradd -d /home/dev -p dev dev
+  RUN useradd -d /home/dev -s /bin/zsh -p dev dev
 
   ## passwords
   RUN echo "dev:dev"   | chpasswd

@@ -5,6 +5,7 @@
   d=${0%/*}; f=${0##*/}; n=${f%.*}; e=${f##*.}
 
   root=$d
+  absroot=`readlink -f $root`
 
   S__SUCCESS=0
   S__NO_SUCH_COMMAND=1
@@ -60,6 +61,9 @@ EOT
       -i|--install)
         (cd ${root}; ssh-keygen -t rsa -b 2048 -f ./phusion-001 -q -N "")
         (cd ${root}; docker build -t ${name} .)
+        (cd ${root}; cat ./phusion-001.pub >> ${absroot}/../users/root/.ssh/authorized_keys)
+        (cd ${root}; cat ./phusion-001.pub >> ${absroot}/../users/home/dev/.ssh/authorized_keys)
+        (cd ${root}; touch ${absroot}/../users/home/dev/.Xauthority)
         ;;
       -s|--start)
         (cd ${root}; \
@@ -70,6 +74,8 @@ EOT
            -t \
            -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
            -v /data:${mount} \
+           -v ${absroot}/../users/root:/root \
+           -v ${absroot}/../users/home:/home \
            ${name} 1>/dev/null 2>/dev/null &)
         ;;
       -S|--stop)
