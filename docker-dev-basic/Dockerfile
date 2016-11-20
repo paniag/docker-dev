@@ -1,4 +1,4 @@
-## Dockerfile
+## Dockerfile for docker-dev-basic
 ## Mac Radigan
 
   FROM phusion/baseimage
@@ -17,6 +17,8 @@
   RUN apt-get install -y xauth
   RUN apt-get install -y zsh
   RUN apt-get install -y screen
+  RUN apt-get install -y wget
+  RUN apt-get install -y curl
 
   ## CM tools
   RUN apt-get install -y git 
@@ -25,6 +27,8 @@
   RUN mkdir /home/dev && \
       mkdir /home/dev/.ssh && \
       chmod -f 700 /home/dev/.ssh && \
+      mkdir /home/dev/.Xauthority && \
+      chmod -f 700 /home/dev/.Xauthority && \
       useradd -d /home/dev -p dev dev
 
   ## passwords

@@ -54,7 +54,7 @@ EOT
     case $arg in
       -c|--connect)
         cmd="ssh -A -X -i ${root}/phusion-001 -p ${port} dev@localhost"
-       #echo $cmd
+        echo $cmd
         eval $cmd
         ;;
       -i|--install)

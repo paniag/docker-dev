@@ -1,4 +1,4 @@
-## Dockerfile
+## Dockerfile for docker-dev-full
 ## Mac Radigan
 
   FROM phusion/baseimage
@@ -17,6 +17,8 @@
   ## basic tools
   RUN apt-get install -y xauth
   RUN apt-get install -y xterm
+  RUN apt-get install -y wget
+  RUN apt-get install -y curl
   RUN apt-get install -y vim
   RUN apt-get install -y vim-gnome
   RUN apt-get install -y zsh
@@ -45,12 +47,6 @@
   RUN apt-get install -y gpp 
   RUN apt-get install -y ditaa 
 
-  ## users
-  RUN mkdir /home/dev && \
-      mkdir /home/dev/.ssh && \
-      chmod -f 700 /home/dev/.ssh && \
-      useradd -d /home/dev -p dev dev
-
   ## Anaconda
   RUN apt-get install -y wget bzip2
   RUN apt-get install -y wget ca-certificates
@@ -62,6 +58,14 @@
     wget --quiet https://repo.continuum.io/archive/Anaconda2-4.2.0-Linux-x86_64.sh -O ~/anaconda.sh && \
     /bin/bash ~/anaconda.sh -b -p /opt/conda && \
     rm ~/anaconda.sh
+
+  ## users
+  RUN mkdir /home/dev && \
+      mkdir /home/dev/.ssh && \
+      chmod -f 700 /home/dev/.ssh && \
+      mkdir /home/dev/.Xauthority && \
+      chmod -f 700 /home/dev/.Xauthority && \
+      useradd -d /home/dev -p dev dev
 
   ## passwords
   RUN echo "dev:dev"   | chpasswd
