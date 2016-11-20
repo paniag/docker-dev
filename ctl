@@ -12,7 +12,15 @@
   usage()
   {
     cat <<-EOT 
-		$f [-c]
+		$f
+		-c,--connect      connect to a running container
+		-i,--install      install a new image
+		-s,--start        run a container instance
+		-S,--stop         stop a container instance
+		-x,--id           display the container id
+		-p,--ps           display the process information
+		   --destroy      remove the image
+		   --destroy-all  remove the image and all running processes
 EOT
     exit 1
   }
