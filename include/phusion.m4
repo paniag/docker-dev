@@ -9,9 +9,9 @@
 
   ## update APT
   RUN dpkg --add-architecture i386
-  RUN apt-get update --fix-missing &&
-      apt-get install -y \
-      apt-utils          \
+  RUN apt-get update --fix-missing && \
+      apt-get install -y              \
+      apt-utils                       \
       xauth
 
   ## SSH
