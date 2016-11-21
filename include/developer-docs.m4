@@ -3,7 +3,10 @@
       apt-get install -y           \
         rsync                      \
         evince                     \
-        latex                      \
+        texlive-latex-extra        \
+        texlive-science            \
+        texlive-full               \
+        python-pygments            \
         pandoc                     \
         gpp                        \
         doxygen                    \
