@@ -2,7 +2,7 @@
 ## makefile (for docker-dev)
 ## Mac Radigan
 
-.PHONY: submodules build clean
+.PHONY: submodules build clean clobber
 .DEFAULT_GOAL := all
 
 all: build
@@ -21,5 +21,9 @@ clean:
 	$(MAKE) -C docker-dev-basic clean
 	$(MAKE) -C docker-dev-full  clean
 	$(MAKE) -C google-earth     clean
+
+clobber: clean
+	docker ps     -a --no-trunc | tail -n +1 | awk '{print $$1}' | xargs -I{} docker stop {}
+	docker images -a --no-trunc | tail -n +1 | awk '{print $$3}' | xargs -I{} docker rmi -f {}
 
 ## *EOF*
