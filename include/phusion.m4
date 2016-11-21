@@ -8,11 +8,12 @@
   CMD ["/sbin/my_init"]
 
   ## update APT
+  RUN ulimit -n 1024
   RUN dpkg --add-architecture i386
   RUN apt-get update --fix-missing && \
       apt-get install -y              \
-      apt-utils                       \
-      xauth
+        apt-utils                     \
+        xauth
 
   ## SSH
   RUN rm -f /etc/service/sshd/down
