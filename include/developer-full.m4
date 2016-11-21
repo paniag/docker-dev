@@ -4,6 +4,7 @@
         xterm            \
         wget             \
         curl             \
+        rsync            \
         vim              \
         vim-gnome        \
         zsh              \

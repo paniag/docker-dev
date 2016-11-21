@@ -7,6 +7,7 @@
         screen           \
         wget             \
         curl             \
+        rsync            \
         build-essential  \
         git               
 
