@@ -5,9 +5,9 @@
 .PHONY: help build clean run start stop connect generate
 .DEFAULT_GOAL := all
 
-include instance.cfg
-
 absroot = $(shell pwd)
+
+include instance.cfg
 
 all: build
 
@@ -28,7 +28,7 @@ start:
            -u dev \
            -t \
            -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
-           -v /data:$(mount) \
+           -v $(mount):/data \
            -v $(absroot)/../users/root:/root \
            -v $(absroot)/../users/home:/home \
            $(name) 1>/dev/null 2>/dev/null &

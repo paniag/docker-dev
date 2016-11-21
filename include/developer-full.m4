@@ -1,32 +1,40 @@
   ## more basic tools
-  RUN apt-get install -y xterm
-  RUN apt-get install -y wget
-  RUN apt-get install -y curl
-  RUN apt-get install -y vim
-  RUN apt-get install -y vim-gnome
-  RUN apt-get install -y zsh
-  RUN apt-get install -y rlwrap
-  RUN apt-get install -y screen
-  RUN apt-get install -y tmux
-  RUN apt-get install -y xclip 
-  RUN apt-get install -y rxvt-unicode 
-  RUN apt-get install -y build-essential
+  RUN apt-get update &&  \
+      apt-get install -y \
+        xterm            \
+        wget             \
+        curl             \
+        vim              \
+        vim-gnome        \
+        zsh              \
+        rlwrap           \
+        screen           \
+        tmux             \
+        xclip            \
+        rxvt-unicode     \
+        build-essential
 
   ## CM tools
-  RUN apt-get install -y git 
-  RUN apt-get install -y mercurial
-  RUN apt-get install -y subversion
+  RUN apt-get update &&  \
+      apt-get install -y \
+        git              \
+        mercurial        \
+        subversion
 
   ## analysis basic
-  RUN apt-get install -y ack-grep 
-  RUN apt-get install -y gnuplot 
-  RUN apt-get install -y graphviz 
+  RUN apt-get update &&  \
+      apt-get install -y \
+        ack-grep         \
+        gnuplot          \
+        graphviz 
 
   ## developer basic
-  RUN apt-get install -y guile-2.0 
-  RUN apt-get install -y guile-2.0-dev 
-  RUN apt-get install -y sbcl 
-  RUN apt-get install -y haskell-platform 
-  RUN apt-get install -y pandoc 
-  RUN apt-get install -y gpp 
-  RUN apt-get install -y ditaa 
+  RUN apt-get update &&  \
+      apt-get install -y \
+        guile-2.0        \
+        guile-2.0-dev    \
+        sbcl             \
+        haskell-platform \
+        pandoc           \
+        gpp              \
+        ditaa 
