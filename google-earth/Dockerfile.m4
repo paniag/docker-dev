@@ -1,7 +1,7 @@
 ## Dockerfile for google-earth
 ## Mac Radigan
 
-include(`phusion.m4')dnl
+include(`ubuntu.m4')dnl
 
 include(`google-earth.m4')dnl
 
