@@ -8,9 +8,11 @@
   CMD ["/sbin/my_init"]
 
   ## update APT
+  RUN dpkg --add-architecture i386
   RUN apt-get update --fix-missing
 
   ## basic tools
+  RUN apt-get install -y apt-utils
   RUN apt-get install -y xauth
 
   ## SSH
