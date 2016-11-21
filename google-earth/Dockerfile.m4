@@ -10,6 +10,4 @@ include(`clean.m4')dnl
   # Google Earth entry point
   ENTRYPOINT ["/usr/bin/google-earth"]
 
-include(`userenv.m4')dnl
-
 include(`footer.m4')dnl
