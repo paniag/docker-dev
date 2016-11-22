@@ -8,6 +8,7 @@
         wget             \
         curl             \
         rsync            \
+        netcat           \
         build-essential  \
         git               
 

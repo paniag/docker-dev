@@ -6,3 +6,4 @@
 
   ## default user
   USER dev
+  RUN echo "set -o vi" >> /etc/bash.bashrc

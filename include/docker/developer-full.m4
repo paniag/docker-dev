@@ -5,6 +5,7 @@
         wget             \
         curl             \
         rsync            \
+        netcat           \
         vim              \
         vim-gnome        \
         zsh              \
@@ -34,8 +35,4 @@
       apt-get install -y \
         guile-2.0        \
         guile-2.0-dev    \
-        sbcl             \
-        haskell-platform \
-        pandoc           \
-        gpp              \
-        ditaa 
+        sbcl              

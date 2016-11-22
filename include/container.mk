@@ -36,7 +36,7 @@ start:
 run:
 	docker run -i \
            -e DISPLAY=${DISPLAY} \
-           -u dev \
+           -t \
            -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
            -v /data:$(mount) \
            -v $(absroot)/../users/root:/root \
@@ -54,6 +54,6 @@ clean:
 
 generate: Dockerfile
 Dockerfile:
-	m4 -I../include Dockerfile.m4 >Dockerfile
+	m4 -I../include/docker Dockerfile.m4 >Dockerfile
 
 ## *EOF*
