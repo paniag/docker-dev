@@ -11,5 +11,11 @@
         netcat           \
         xclip            \
         build-essential  \
-        git               
+        locate           \
+        git              \
+        x11vnc           \
+        vnc4server       \
+        i3               \
+        twm              \
+        fvwm
 
