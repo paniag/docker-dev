@@ -2,11 +2,17 @@
 ## container.mk
 ## Mac Radigan
 
-.PHONY: help build clean run start stop connect generate
+.PHONY: help acls build clean run start stop connect generate init-hook clean-hook
 
 absroot = $(shell pwd)
 
+init-hook:
+	@echo "OVERRIDE ME" >/dev/null
+clean-hook:
+	@echo "OVERRIDE ME" >/dev/null
+
 include instance.cfg
+-include settings.mk
 
 ifdef ssh-port
   opt-ssh-port = -p $(ssh-port):22 
@@ -17,23 +23,59 @@ endif
 ifdef vncx0-port
   opt-vncx0-port = -p $(vncx0-port):5900
 endif
+ifdef httpd-port
+  opt-httpd-port = -p $(httpd-port):80
+endif
+ifdef influx-web-port
+  opt-influx-web-port = -p $(influx-web-port):8083
+endif
+ifdef influx-port
+  opt-influx-port = -p $(influx-port):8086
+endif
 ifdef jupyter-port
   opt-jupyter-port = -p $(jupyter-port):8888
 endif
-ifdef mount
-  opt-mount = -v $(mount):/dat 
+ifdef data
+  opt-data = -v $(data):/data
 endif
-run-opts = $(opt-ssh-port) $(opt-vncx0-port) $(opt-vnc-port) $(opt-jupyter-port) $(opt-mount)
+ifdef srv
+  opt-srv = -v $(srv):/srv 
+endif
+ifdef mount1-local
+  opt-mount1 = -v $(mount1-host):$(mount1-local)
+endif
+ifdef mount2-local
+  opt-mount2 = -v $(mount2-host):$(mount2-local)
+endif
+ifdef mount3-local
+  opt-mount3 = -v $(mount3-host):$(mount3-local)
+endif
+ifdef mount4-local
+  opt-mount4 = -v $(mount4-host):$(mount4-local)
+endif
+ifdef mount5-local
+  opt-mount5 = -v $(mount5-host):$(mount5-local)
+endif
+ifdef mount6-local
+  opt-mount6 = -v $(mount6-host):$(mount6-local)
+endif
+run-opts = $(opt-mount1) $(opt-mount2) $(opt-mount3) $(opt-mount4) $(opt-mount5) $(opt-mount6) $(opt-ssh-port) $(opt-vncx0-port) $(opt-vnc-port) $(opt-httpd-port) $(influx-port) $(influx-web-port) $(opt-jupyter-port) $(opt-data) $(opt-srv)
 
-build: generate
-	ssh-keygen -t rsa -b 2048 -f ./phusion-001 -q -N ""
+build: init-hook generate acls
 	docker build -t $(name) .
-	cat ./phusion-001.pub >> $(absroot)/../users/root/.ssh/authorized_keys
-	cat ./phusion-001.pub >> $(absroot)/../users/home/dev/.ssh/authorized_keys
+	cat ../security/phusion-001.pub >> $(absroot)/../users/root/.ssh/authorized_keys
+	cat ../security/phusion-001.pub >> $(absroot)/../users/home/dev/.ssh/authorized_keys
 	touch $(absroot)/../users/home/dev/.Xauthority
 
+acls: ../security/phusion-001
+	@echo "PHONY " >/dev/null
+
+../security/phusion-001:
+	-mkdir -p ../security
+	ssh-keygen -t rsa -b 2048 -f $@ -q -N ""
+
 connect:
-	ssh -A -X -i $(absroot)/phusion-001 -p $(ssh-port) dev@localhost
+	ssh -A -X -i $(absroot)/../security/phusion-001 -p $(ssh-port) dev@localhost
 
 start:
 	docker run \
@@ -48,6 +90,7 @@ start:
 
 run:
 	docker run -i \
+           $(run-opts) \
            -e DISPLAY=${DISPLAY} \
            -t \
            -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
@@ -57,12 +100,17 @@ run:
 stop:                                                
 	docker ps -a --no-trunc | grep $(name) | awk '{print$$1}' | xargs -I{} docker stop {}
 
-clean:
+clean: clean-hook
 	-rm -f ./Dockerfile
 	docker ps -a --no-trunc | grep $(name) | awk '{print$$1}' | xargs -I{} docker stop {}
 	docker images -a --no-trunc | grep $(name) | awk '{print$$3}' | xargs -I{} docker rmi -f {}
-	-rm -f ./phusion-001
-	-rm -f ./phusion-001.pub
+
+clobber:
+	-rm -f ./Dockerfile
+	docker ps -a --no-trunc | grep $(name) | awk '{print$$1}' | xargs -I{} docker stop {}
+	docker images -a --no-trunc | grep $(name) | awk '{print$$3}' | xargs -I{} docker rmi -f {}
+	-rm -f ../security/phusion-001
+	-rm -f ../security/phusion-001.pub
 
 generate: Dockerfile
 Dockerfile:
