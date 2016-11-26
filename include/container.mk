@@ -10,6 +10,8 @@ init-hook:
 	@echo "OVERRIDE ME" >/dev/null
 clean-hook:
 	@echo "OVERRIDE ME" >/dev/null
+post-build-hook:
+	@echo "OVERRIDE ME" >/dev/null
 
 include instance.cfg
 -include settings.mk
@@ -66,6 +68,7 @@ build: init-hook generate acls
 	cat ../security/phusion-001.pub >> $(absroot)/../users/root/.ssh/authorized_keys
 	cat ../security/phusion-001.pub >> $(absroot)/../users/home/dev/.ssh/authorized_keys
 	touch $(absroot)/../users/home/dev/.Xauthority
+	$(MAKE) post-build-hook
 
 acls: ../security/phusion-001
 	@echo "PHONY " >/dev/null
@@ -99,6 +102,11 @@ run:
 
 stop:                                                
 	docker ps -a --no-trunc | grep $(name) | awk '{print$$1}' | xargs -I{} docker stop {}
+
+flatten:
+	$(MAKE) start
+	docker ps -a --no-trunc | grep $(name) | awk '{print$$1}' | xargs -I{} docker export {} | docker import - $(name):flat
+	$(MAKE) stop
 
 clean: clean-hook
 	-rm -f ./Dockerfile

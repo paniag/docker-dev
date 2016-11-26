@@ -1,4 +1,4 @@
-## init.mk
+## settings.mk
 ## Mac Radigan
 
 init-hook:

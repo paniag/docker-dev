@@ -12,28 +12,34 @@ submodules:
 	$(MAKE) -C $@
 
 build:
-	$(MAKE) -C docker-dev-av     $@
-	$(MAKE) -C docker-dev-basic  $@
-	$(MAKE) -C docker-dev-full   $@
-	$(MAKE) -C google-earth      $@
-	$(MAKE) -C influxdb          $@
-	$(MAKE) -C haskell           $@
-	$(MAKE) -C jsoftware         $@
-	$(MAKE) -C mutt              $@
-	$(MAKE) -C neovim            $@
-	$(MAKE) -C sbcl              $@
+	$(MAKE) -C docker-dev-python $@
+	$(MAKE) -C httpd             $@
+	$(MAKE) -C postgis           $@
+	#$(MAKE) -C docker-dev-av     $@
+	#$(MAKE) -C docker-dev-basic  $@
+	#$(MAKE) -C docker-dev-full   $@
+	#$(MAKE) -C google-earth      $@
+	#$(MAKE) -C influxdb          $@
+	#$(MAKE) -C haskell           $@
+	#$(MAKE) -C jsoftware         $@
+	#$(MAKE) -C mutt              $@
+	#$(MAKE) -C neovim            $@
+	#$(MAKE) -C sbcl              $@
 
 clean:
-	$(MAKE) -C docker-dev-av     $@
-	$(MAKE) -C docker-dev-basic  $@
-	$(MAKE) -C docker-dev-full   $@
-	$(MAKE) -C google-earth      $@
-	$(MAKE) -C influxdb          $@
-	$(MAKE) -C haskell           $@
-	$(MAKE) -C jsoftware         $@
-	$(MAKE) -C mutt              $@
-	$(MAKE) -C neovim            $@
-	$(MAKE) -C sbcl              $@
+	$(MAKE) -C docker-dev-python $@
+	$(MAKE) -C httpd             $@
+	$(MAKE) -C postgis           $@
+	#$(MAKE) -C docker-dev-av     $@
+	#$(MAKE) -C docker-dev-basic  $@
+	#$(MAKE) -C docker-dev-full   $@
+	#$(MAKE) -C google-earth      $@
+	#$(MAKE) -C influxdb          $@
+	#$(MAKE) -C haskell           $@
+	#$(MAKE) -C jsoftware         $@
+	#$(MAKE) -C mutt              $@
+	#$(MAKE) -C neovim            $@
+	#$(MAKE) -C sbcl              $@
 
 clobber: clean
 	docker ps     -a --no-trunc | tail -n +1 | awk '{print $$1}' | xargs -I{} docker stop {}

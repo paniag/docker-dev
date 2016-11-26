@@ -12,4 +12,6 @@ include(`developer-anaconda.m4')dnl
 
 include(`userenv.m4')dnl
 
+include(`clean.m4')dnl
+
 include(`footer.m4')dnl

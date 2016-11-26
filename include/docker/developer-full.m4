@@ -13,6 +13,7 @@
         screen           \
         tmux             \
         xclip            \
+        htop             \
         rxvt-unicode     \
         build-essential
 

@@ -3,6 +3,8 @@
       apt-get install -y           \
         rsync                      \
         evince                     \
+        xclip                      \
+        htop                       \
         texlive-latex-extra        \
         texlive-science            \
         texlive-full               \

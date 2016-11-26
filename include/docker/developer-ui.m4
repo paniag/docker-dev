@@ -10,6 +10,7 @@
         rsync            \
         netcat           \
         xclip            \
+        htop             \
         build-essential  \
         locate           \
         git              \
