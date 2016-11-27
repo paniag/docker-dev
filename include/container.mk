@@ -37,6 +37,9 @@ endif
 ifdef jupyter-port
   opt-jupyter-port = -p $(jupyter-port):8888
 endif
+ifdef jupyterhub-port
+  opt-jupyterhub-port = -p $(jupyterhub-port):8000
+endif
 ifdef data
   opt-data = -v $(data):/data
 endif
@@ -61,7 +64,7 @@ endif
 ifdef mount6-local
   opt-mount6 = -v $(mount6-host):$(mount6-local)
 endif
-run-opts = $(opt-mount1) $(opt-mount2) $(opt-mount3) $(opt-mount4) $(opt-mount5) $(opt-mount6) $(opt-ssh-port) $(opt-vncx0-port) $(opt-vnc-port) $(opt-httpd-port) $(influx-port) $(influx-web-port) $(opt-jupyter-port) $(opt-data) $(opt-srv)
+run-opts = $(opt-mount1) $(opt-mount2) $(opt-mount3) $(opt-mount4) $(opt-mount5) $(opt-mount6) $(opt-ssh-port) $(opt-vncx0-port) $(opt-vnc-port) $(opt-httpd-port) $(influx-port) $(influx-web-port) $(opt-jupyter-port) $(opt-jupyterhub-port) $(opt-data) $(opt-srv)
 
 build: init-hook generate acls
 	docker build -t $(name) .

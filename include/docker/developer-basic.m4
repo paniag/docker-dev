@@ -12,4 +12,3 @@
         xclip            \
         build-essential  \
         git               
-

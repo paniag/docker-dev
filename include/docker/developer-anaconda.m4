@@ -107,64 +107,64 @@
 
   ## pip
 
-  RUN python3 -m pip install              csvkit            && \
-      python3 -m pip install              dbf               && \
-      python3 -m pip install              dbf               && \
-      python3 -m pip install              django            && \
-      python3 -m pip install              ecdsa             && \
-      python3 -m pip install              fiona             && \
-      python3 -m pip install              flask             && \
-      python3 -m pip install              folium            && \
-      python3 -m pip install              gdal              && \
-      python3 -m pip install              geopandas         && \
-      python3 -m pip install              gpxpy             && \
-      python3 -m pip install              graphviz          && \
-      python3 -m pip install              hyde              && \
-      python3 -m pip install              ipython           && \
-      python3 -m pip install              jupyter           && \
-      python3 -m pip install              jupyter_client    && \
-      python3 -m pip install              jupyter_console   && \
-      python3 -m pip install              jupyter_core      && \
-      python3 -m pip install              nbconvert         && \
-      python3 -m pip install              nbpresent         && \
-      python3 -m pip install              nltk              && \
-      python3 -m pip install              notebook          && \
-      python3 -m pip install              numpy             && \
-      python3 -m pip install              pandas            && \
-      python3 -m pip install              pandoc            && \
-      python3 -m pip install              pillow            && \
-      python3 -m pip install              pyproj            && \
-      python3 -m pip install              pyzmq             && \
-      python3 -m pip install              scipy             && \
-      python3 -m pip install              shapely           && \
-      python3 -m pip install              snuggs            && \
-      python3 -m pip install              sphinx            && \
-      python3 -m pip install              sympy             && \
-      python3 -m pip install              ujson             && \
-      python3 -m pip install              uuid              && \
-      python3 -m pip install              vincent
+  RUN /usr/bin/python -m pip install              csvkit            && \
+      /usr/bin/python -m pip install              dbf               && \
+      /usr/bin/python -m pip install              dbf               && \
+      /usr/bin/python -m pip install              django            && \
+      /usr/bin/python -m pip install              ecdsa             && \
+      /usr/bin/python -m pip install              fiona             && \
+      /usr/bin/python -m pip install              flask             && \
+      /usr/bin/python -m pip install              folium            && \
+      /usr/bin/python -m pip install              gdal              && \
+      /usr/bin/python -m pip install              geopandas         && \
+      /usr/bin/python -m pip install              gpxpy             && \
+      /usr/bin/python -m pip install              graphviz          && \
+      /usr/bin/python -m pip install              hyde              && \
+      /usr/bin/python -m pip install              ipython           && \
+      /usr/bin/python -m pip install              jupyter           && \
+      /usr/bin/python -m pip install              jupyter_client    && \
+      /usr/bin/python -m pip install              jupyter_console   && \
+      /usr/bin/python -m pip install              jupyter_core      && \
+      /usr/bin/python -m pip install              nbconvert         && \
+      /usr/bin/python -m pip install              nbpresent         && \
+      /usr/bin/python -m pip install              nltk              && \
+      /usr/bin/python -m pip install              notebook          && \
+      /usr/bin/python -m pip install              numpy             && \
+      /usr/bin/python -m pip install              pandas            && \
+      /usr/bin/python -m pip install              pandoc            && \
+      /usr/bin/python -m pip install              pillow            && \
+      /usr/bin/python -m pip install              pyproj            && \
+      /usr/bin/python -m pip install              pyzmq             && \
+      /usr/bin/python -m pip install              scipy             && \
+      /usr/bin/python -m pip install              shapely           && \
+      /usr/bin/python -m pip install              snuggs            && \
+      /usr/bin/python -m pip install              sphinx            && \
+      /usr/bin/python -m pip install              sympy             && \
+      /usr/bin/python -m pip install              ujson             && \
+      /usr/bin/python -m pip install              uuid              && \
+      /usr/bin/python -m pip install              vincent
 
- #RUN python3 -m pip install              basemap
- #RUN python3 -m pip install              beautiful-soup
- #RUN python3 -m pip install              geotiff
- #RUN python3 -m pip install              hdf5
- #RUN python3 -m pip install              libffi
- #RUN python3 -m pip install              libpq
- #RUN python3 -m pip install              mkl
- #RUN python3 -m pip install              openblas
- #RUN python3 -m pip install              paramiko
- #RUN python3 -m pip install              postgresql
- #RUN python3 -m pip install              pyaudio
- #RUN python3 -m pip install              pyodbc
- #RUN python3 -m pip install              pytables
- #RUN python3 -m pip install              scrapy
- #RUN python3 -m pip install              sqlite
+ #RUN /usr/bin/python -m pip install              basemap
+ #RUN /usr/bin/python -m pip install              beautiful-soup
+ #RUN /usr/bin/python -m pip install              geotiff
+ #RUN /usr/bin/python -m pip install              hdf5
+ #RUN /usr/bin/python -m pip install              libffi
+ #RUN /usr/bin/python -m pip install              libpq
+ #RUN /usr/bin/python -m pip install              mkl
+ #RUN /usr/bin/python -m pip install              openblas
+ #RUN /usr/bin/python -m pip install              paramiko
+ #RUN /usr/bin/python -m pip install              postgresql
+ #RUN /usr/bin/python -m pip install              pyaudio
+ #RUN /usr/bin/python -m pip install              pyodbc
+ #RUN /usr/bin/python -m pip install              pytables
+ #RUN /usr/bin/python -m pip install              scrapy
+ #RUN /usr/bin/python -m pip install              sqlite
 
   RUN jupyter nbextension install nbpresent --py --overwrite
   RUN jupyter nbextension enable nbpresent --py
   RUN jupyter serverextension enable nbpresent --py
 
-  RUN mkdir -p /tmp/install
-  RUN git clone https://github.com/geopandas/geopandas.git /tmp/install/geopandas
-  RUN (cd /tmp/install/geopandas; pip3 install .)
-  RUN rm -Rf /tmp/install
+# RUN mkdir -p /tmp/install
+# RUN git clone https://github.com/geopandas/geopandas.git /tmp/install/geopandas
+# RUN (cd /tmp/install/geopandas; pip3 install .)
+# RUN rm -Rf /tmp/install
