@@ -111,6 +111,12 @@ flatten:
 	docker ps -a --no-trunc | grep $(name) | awk '{print$$1}' | xargs -I{} docker export {} | docker import - $(name):flat
 	$(MAKE) stop
 
+export:
+	docker ps -a --no-trunc | grep $(name) | awk '{print$$1}' | xargs -I{} docker export {} >$(subst /,_,$(name)).img
+
+save:
+	docker ps -a --no-trunc | grep $(name) | awk '{print$$1}' | xargs -I{} docker save {} >$(subst /,_,$(name)).img-flat
+
 clean: clean-hook
 	-rm -f ./Dockerfile
 	docker ps -a --no-trunc | grep $(name) | awk '{print$$1}' | xargs -I{} docker stop {}
