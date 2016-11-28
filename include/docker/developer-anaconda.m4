@@ -141,9 +141,9 @@
       /usr/bin/python -m pip install              sphinx            && \
       /usr/bin/python -m pip install              sympy             && \
       /usr/bin/python -m pip install              ujson             && \
-      /usr/bin/python -m pip install              uuid
+      /usr/bin/python -m pip install              uuid              && \
+      /usr/bin/python -m pip install              vincent
 
- #RUN /usr/bin/python -m pip install              vincent
  #RUN /usr/bin/python -m pip install              basemap
  #RUN /usr/bin/python -m pip install              beautiful-soup
  #RUN /usr/bin/python -m pip install              geotiff
