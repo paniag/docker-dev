@@ -19,6 +19,9 @@ include instance.cfg
 ifdef ssh-port
   opt-ssh-port = -p $(ssh-port):22 
 endif
+ifdef nodejs-port
+  opt-nodejs-port = -p $(nodejs-port):8081
+endif
 ifdef vnc-port
   opt-vnc-port = -p $(vnc-port):5901 
 endif
@@ -64,7 +67,7 @@ endif
 ifdef mount6-local
   opt-mount6 = -v $(mount6-host):$(mount6-local)
 endif
-run-opts = $(opt-mount1) $(opt-mount2) $(opt-mount3) $(opt-mount4) $(opt-mount5) $(opt-mount6) $(opt-ssh-port) $(opt-vncx0-port) $(opt-vnc-port) $(opt-httpd-port) $(influx-port) $(influx-web-port) $(opt-jupyter-port) $(opt-jupyterhub-port) $(opt-data) $(opt-srv)
+run-opts = $(opt-mount1) $(opt-mount2) $(opt-mount3) $(opt-mount4) $(opt-mount5) $(opt-mount6) $(opt-ssh-port) $(opt-nodejs-port) $(opt-vncx0-port) $(opt-vnc-port) $(opt-httpd-port) $(influx-port) $(influx-web-port) $(opt-jupyter-port) $(opt-jupyterhub-port) $(opt-data) $(opt-srv)
 
 build: init-hook generate acls
 	docker build -t $(name) .
