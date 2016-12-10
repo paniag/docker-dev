@@ -41,6 +41,25 @@ EOT
     usage
   fi
 
+  util()
+  {
+    cmd=$1; shift
+    case $cmd in
+      find)
+        /usr/bin/find $*
+        ;;
+      shell)
+        /bin/bash $*
+        ;;
+      exec)
+        exec $*
+        ;;
+      *)
+        die $S__NO_SUCH_COMMAND "invalid utility: $cmd, must be one of ( find | shell | exec )"
+        ;;
+    esac
+  }
+
   run()
   {
     cmd=$1; shift
@@ -66,6 +85,9 @@ EOT
       ;;
     netconvert)
       /usr/local/bin/netconvert $*
+      ;;
+    util)
+      util $*
       ;;
     *)
       die $S__NO_SUCH_COMMAND "invalid command: $cmd"
