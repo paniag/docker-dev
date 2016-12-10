@@ -1,0 +1,211 @@
+#!/bin/bash
+## kafka_ctl
+## Mac Radigan
+
+  d=${0%/*}; f=${0##*/}; n=${f%.*}; e=${f##*.}
+  if [ -f /opt/current.env ]; 
+  then
+    .  /opt/current.env
+  fi
+
+  S__SUCCESS=0
+  S__NO_SUCH_COMMAND=1
+
+  usage()
+  {
+    >&2 cat <<-EOT 
+		$f [args]
+			  start                            - start Kafka
+			  stop                             - stop Kafka
+			  logs                             - print Kafka logs
+			  create                           - create a new Kafka topic
+			  produce                          - produce a message to a Kafka topic
+			  consume                          - consume  and print a message from a Kafka topic
+			  kafka-preferred-replica-election - 
+			  kafka-rest-stop-service          - 
+			  kafka-simple-consumer-shell      - 
+			  kafka-avro-console-consumer      - 
+			  kafka-configs                    - 
+			  kafka-server-start               - 
+			  kafka-consumer-perf-test         - 
+			  kafka-verifiable-producer        - 
+			  kafka-avro-console-producer      - 
+			  kafka-consumer-offset-checker    - 
+			  kafka-rest-run-class             - 
+			  kafka-run-class                  - 
+			  kafka-verifiable-consumer        - 
+			  kafka-rest-stop                  - 
+			  kafka-reassign-partitions        - 
+			  kafka-acls                       - 
+			  kafka-console-consumer           - 
+			  kafka-server-stop                - 
+			  kafka-console-producer           - 
+			  kafka-consumer-groups            - 
+			  kafka-mirror-maker               - 
+			  kafka-replay-log-producer        - 
+			  kafka-topics                     - 
+			  kafka-replica-verification       - 
+			  kafka-streams-application-reset  - 
+			  kafka-rest-start                 - 
+			  kafka-producer-perf-test         - 
+EOT
+    exit ${S__SUCCESS}
+  }
+
+  die()
+  {
+    code=$1; shift
+    msg=$1;  shift
+    (>&2 echo "ERROR ${code}: ${msg}")
+    exit $code
+  }
+
+  warn()
+  {
+    code=$1; shift
+    msg=$1;  shift
+    (>&2 echo "WARN ${code}: ${msg}")
+    exit $code
+  }
+
+  if [[ "$#" == "0" ]]; then
+    usage
+  fi
+
+  util()
+  {
+    cmd=$1; shift
+    case $cmd in
+      find)
+        /usr/bin/find $*
+        ;;
+      shell)
+        /bin/bash $*
+        ;;
+      exec)
+        exec $*
+        ;;
+      *)
+        die $S__NO_SUCH_COMMAND "invalid utility: $cmd, must be one of ( find | shell | exec )"
+        ;;
+    esac
+  }
+
+  run()
+  {
+    cmd=$1; shift
+    $cmd $*
+  }
+
+  sigint()
+  {
+    (>&2 echo "TODO:  abort code here")
+    #stop-all
+    #for job in $(jobs -p)
+    #do
+    #  wait $job || warn job "could not wait on job: $job"
+    #done
+  }
+
+# trap sigint SIGINT
+
+  cmd=$1; shift
+  case $cmd in
+    start)
+      /usr/bin/kafka-server-start $*
+      ;;
+    stop)
+      /usr/bin/kafka-server-stop $*
+      ;;
+    kafka-preferred-replica-election)
+      /usr/bin/kafka-preferred-replica-election
+      ;;
+    kafka-rest-stop-service)
+      /usr/bin/kafka-rest-stop-service
+      ;;
+    kafka-simple-consumer-shell)
+      /usr/bin/kafka-simple-consumer-shell
+      ;;
+    kafka-avro-console-consumer)
+      /usr/bin/kafka-avro-console-consumer
+      ;;
+    kafka-configs)
+      /usr/bin/kafka-configs
+      ;;
+    kafka-server-start)
+      /usr/bin/kafka-server-start
+      ;;
+    kafka-consumer-perf-test)
+      /usr/bin/kafka-consumer-perf-test
+      ;;
+    kafka-verifiable-producer)
+      /usr/bin/kafka-verifiable-producer
+      ;;
+    kafka-avro-console-producer)
+      /usr/bin/kafka-avro-console-producer
+      ;;
+    kafka-consumer-offset-checker)
+      /usr/bin/kafka-consumer-offset-checker
+      ;;
+    kafka-rest-run-class)
+      /usr/bin/kafka-rest-run-class
+      ;;
+    kafka-run-class)
+      /usr/bin/kafka-run-class
+      ;;
+    kafka-verifiable-consumer)
+      /usr/bin/kafka-verifiable-consumer
+      ;;
+    kafka-rest-stop)
+      /usr/bin/kafka-rest-stop
+      ;;
+    kafka-reassign-partitions)
+      /usr/bin/kafka-reassign-partitions
+      ;;
+    kafka-acls)
+      /usr/bin/kafka-acls
+      ;;
+    kafka-console-consumer)
+      /usr/bin/kafka-console-consumer
+      ;;
+    kafka-server-stop)
+      /usr/bin/kafka-server-stop
+      ;;
+    kafka-console-producer)
+      /usr/bin/kafka-console-producer
+      ;;
+    kafka-consumer-groups)
+      /usr/bin/kafka-consumer-groups
+      ;;
+    kafka-mirror-maker)
+      /usr/bin/kafka-mirror-maker
+      ;;
+    kafka-replay-log-producer)
+      /usr/bin/kafka-replay-log-producer
+      ;;
+    kafka-topics)
+      /usr/bin/kafka-topics
+      ;;
+    kafka-replica-verification)
+      /usr/bin/kafka-replica-verification
+      ;;
+    kafka-streams-application-reset)
+      /usr/bin/kafka-streams-application-reset
+      ;;
+    kafka-rest-start)
+      /usr/bin/kafka-rest-start
+      ;;
+    kafka-producer-perf-test)
+      /usr/bin/kafka-producer-perf-test
+      ;;
+    util)
+      util $*
+      ;;
+    *)
+      die $S__NO_SUCH_COMMAND "invalid command: $cmd"
+      ;;
+  esac
+
+  exit $S__SUCCESS
+
+## *EOF*
