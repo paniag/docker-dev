@@ -16,6 +16,11 @@ post-build-hook:
 include instance.cfg
 -include settings.mk
 
+ifdef ARGS
+  opt-args = $(ARGS)
+endif
+arg-opts = $(opt-args)
+
 ifdef ssh-port
   opt-ssh-port = -p $(ssh-port):22 
 endif
@@ -95,7 +100,8 @@ start:
            -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
            -v $(absroot)/../users/root:/root \
            -v $(absroot)/../users/home:/home \
-           $(name) 1>/dev/null 2>/dev/null &
+           $(name) $(arg-opts) \
+           1>/dev/null 2>/dev/null &
 
 run:
 	docker run -i \
@@ -104,7 +110,7 @@ run:
            -t \
            -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
            -v $(absroot)/../users/root:/root \
-           $(name)
+           $(name) $(arg-opts)
 
 stop:                                                
 	docker ps -a --no-trunc | grep $(name) | awk '{print$$1}' | xargs -I{} docker stop {}
