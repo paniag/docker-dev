@@ -12,5 +12,6 @@
   RUN (cd /opt/sumo; make)
   RUN (cd /opt/sumo; make install)
 
-  # SUMO entry point
-  ENTRYPOINT ["/usr/local/bin/sumo"]
+# # SUMO entry point
+# ENTRYPOINT ["/usr/local/bin/netconvert"]
+# ENTRYPOINT ["/usr/local/bin/sumo"]
