@@ -1,6 +1,9 @@
 #!/bin/bash
-## sumo_ctl
+## root_ctl
 ## Mac Radigan
+##
+## Copyright 2016 Mac Radigan
+## All Rights Reserved
 
   d=${0%/*}; f=${0##*/}; n=${f%.*}; e=${f##*.}
   if [ -f /opt/current.env ]; 
@@ -15,8 +18,7 @@
   {
     >&2 cat <<-EOT 
 		$f [args]
-			  sumo             - run sumo
-			  netconvert       - run netconvert
+			  root                     - run CERN root
 EOT
     exit ${S__SUCCESS}
   }
@@ -54,11 +56,17 @@ EOT
       ls)
         /bin/ls $*
         ;;
+      cat)
+        /bin/cat $*
+        ;;
+      ps)
+        /bin/ps $*
+        ;;
       exec)
         exec $*
         ;;
       *)
-        die $S__NO_SUCH_COMMAND "invalid utility: $cmd, must be one of ( find | shell | exec | ls )"
+        die $S__NO_SUCH_COMMAND "invalid utility: $cmd, must be one of ( find | shell | exec | ls | cat | ps )"
         ;;
     esac
   }
@@ -71,23 +79,17 @@ EOT
 
   sigint()
   {
-    (>&2 echo "TODO:  abort code here")
-    #stop-all
-    #for job in $(jobs -p)
-    #do
-    #  wait $job || warn job "could not wait on job: $job"
-    #done
+    (>&2 echo "shutting down")
+    /etc/init.d/nginx stop
+    kill 0
   }
 
-# trap sigint SIGINT
+  trap sigint SIGINT
 
   cmd=$1; shift
   case $cmd in
-    sumo)
-      /usr/local/bin/sumo $*
-      ;;
-    netconvert)
-      /usr/local/bin/netconvert $*
+    root)
+      /usr/bin/root $*
       ;;
     util)
       util $*

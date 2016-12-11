@@ -21,6 +21,11 @@ ifdef ARGS
 endif
 arg-opts = $(opt-args)
 
+ifdef no-security
+  opt-unconfined = --security-opt seccomp=unconfined
+endif
+security-opts = $(opt-unconfined)
+
 ifdef ssh-port
   opt-ssh-port = -p $(ssh-port):22 
 endif
@@ -94,6 +99,7 @@ connect:
 start:
 	docker run \
            $(run-opts) \
+           $(security-opts) \
            -e DISPLAY=${DISPLAY} \
            -u dev \
            -t \
@@ -106,6 +112,7 @@ start:
 run:
 	docker run -i \
            $(run-opts) \
+           $(security-opts) \
            -e DISPLAY=${DISPLAY} \
            -t \
            -v /tmp/.X11-unix:/tmp/.X11-unix:ro \

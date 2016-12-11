@@ -1,4 +1,4 @@
-  ## CERN Root
+  ## Axiom
   RUN apt-get update &&  \
       apt-get install -y \
-        root-system
+        axiom

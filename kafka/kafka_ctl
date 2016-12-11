@@ -82,11 +82,14 @@ EOT
       shell)
         /bin/bash $*
         ;;
+      ls)
+        /bin/ls $*
+        ;;
       exec)
         exec $*
         ;;
       *)
-        die $S__NO_SUCH_COMMAND "invalid utility: $cmd, must be one of ( find | shell | exec )"
+        die $S__NO_SUCH_COMMAND "invalid utility: $cmd, must be one of ( find | shell | exec | ls )"
         ;;
     esac
   }
@@ -99,15 +102,12 @@ EOT
 
   sigint()
   {
-    (>&2 echo "TODO:  abort code here")
-    #stop-all
-    #for job in $(jobs -p)
-    #do
-    #  wait $job || warn job "could not wait on job: $job"
-    #done
+    (>&2 echo "shutting down")
+    /etc/init.d/nginx stop
+    kill 0
   }
 
-# trap sigint SIGINT
+  trap sigint SIGINT
 
   cmd=$1; shift
   case $cmd in
