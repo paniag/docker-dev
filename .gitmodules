@@ -1,6 +1,6 @@
-[submodule "distribution"]
-	path = distribution
-	url = git@github.com:radiganm/distribution.git
 [submodule "sumo/scenarios/LuSTScenario"]
 	path = sumo/scenarios/LuSTScenario
-	url = git@github.com:radiganm/LuSTScenario.git
+	url = https://github.com/radiganm/LuSTScenario.git
+[submodule "distribution"]
+	path = distribution
+	url = https://github.com/radiganm/distribution.git
