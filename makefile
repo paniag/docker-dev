@@ -2,7 +2,7 @@
 ## makefile (for docker-dev)
 ## Mac Radigan
 
-.PHONY: submodules build clean clobber help
+.PHONY: submodules build clean clobber help 
 .DEFAULT_GOAL := help
 
 help:
