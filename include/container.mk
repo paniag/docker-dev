@@ -106,6 +106,7 @@ start:
            -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
            -v $(absroot)/../users/root:/root \
            -v $(absroot)/../users/home:/home \
+           -P \
            $(name) $(arg-opts) \
            1>/dev/null 2>/dev/null &
 
@@ -117,6 +118,7 @@ run:
            -t \
            -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
            -v $(absroot)/../users/root:/root \
+           -P \
            $(name) $(arg-opts)
 
 stop:                                                
