@@ -6,7 +6,10 @@
         apt-utils                    \
         build-essential              \
         dh-autoreconf                \
-        git
+        git                          \
+        libgpg-error                 \
+        libgcrypt11-dev               
+
 
   RUN mkdir -p /opt/source/openssl
   RUN (cd /opt/source; git clone https://github.com/radiganm/openssl.git)
@@ -14,4 +17,5 @@
 
   RUN mkdir -p /opt/source/gnupg
   RUN (cd /opt/source; git clone https://github.com/radiganm/gnupg.git)
+  RUN (cd /opt/source/gnupg; autoreconf --install --force)
   RUN (cd /opt/source/gnupg; autoconf && ./configure && make && make install)
