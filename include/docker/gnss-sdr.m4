@@ -30,4 +30,4 @@
 
   RUN mkdir -p /opt
   RUN (cd /opt; git clone https://github.com/radiganm/gnss-sdr.git ./gnss-sdr)
-  RUN (cd /opt/gnss-sdr/build; cmake .. && make && sudo make install)
+  RUN (cd /opt/gnss-sdr/build; cmake .. && make && make install)
